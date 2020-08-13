@@ -1,6 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
+using xf.examen.themoviedb.Views;
 
 namespace xf.examen.themoviedb
 {
