@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using xf.examen.themoviedb.Models;
 using xf.examen.themoviedb.Services;
+using xf.examen.themoviedb.Views;
 
 namespace xf.examen.themoviedb.ViewModels
 {
@@ -119,6 +120,22 @@ namespace xf.examen.themoviedb.ViewModels
                 });
             }
         }
+
+        private ActionCommand<Movie> _SelectedItemCommand;
+        public ActionCommand<Movie> SelectedItemCommand
+        {
+            get
+            {
+                return _SelectedItemCommand = _SelectedItemCommand ?? new ActionCommand<Movie>((_movie) =>
+                {
+                    if (_movie != null)
+                    {
+                        App.Current.MainPage.Navigation.PushAsync(new DetailPage(_movie.MovieId));
+                    }
+                });
+            }
+        }
+
 
     }
 }
