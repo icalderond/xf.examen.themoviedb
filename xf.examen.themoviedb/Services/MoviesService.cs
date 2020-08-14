@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using xf.examen.themoviedb.Models;
 
@@ -26,7 +27,7 @@ namespace xf.examen.themoviedb.Services
             getPopularQuery = $"{URL_BASE_APIREST}/popular?api_key={Environment.THEMOVIEDB_API_KEY}&language=en-US&page=1";
         }
 
-        public async void GetTopRated()
+        public async Task GetTopRated()
         {
             var baseResponse = new BaseResponse();
 
@@ -36,13 +37,14 @@ namespace xf.examen.themoviedb.Services
             {
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
+                if (baseResponse.Movies != null)
+                    baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
             }
-            baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
 
             GetTopRated_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
         }
 
-        public async void GetUpComing()
+        public async Task GetUpComing()
         {
             var baseResponse = new BaseResponse();
 
@@ -52,13 +54,14 @@ namespace xf.examen.themoviedb.Services
             {
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
+                if (baseResponse.Movies != null)
+                    baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
             }
-            baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
 
             GetUpComing_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
         }
 
-        public async void GetPopular()
+        public async Task GetPopular()
         {
             var baseResponse = new BaseResponse();
 
@@ -68,8 +71,9 @@ namespace xf.examen.themoviedb.Services
             {
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
+                if (baseResponse.Movies != null)
+                    baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
             }
-            baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
 
             GetPopular_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
         }

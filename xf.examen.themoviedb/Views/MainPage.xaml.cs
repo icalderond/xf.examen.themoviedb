@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using xf.examen.themoviedb.Services;
+﻿using Xamarin.Forms;
+using xf.examen.themoviedb.ViewModels;
 
 namespace xf.examen.themoviedb.Views
 {
@@ -11,13 +8,7 @@ namespace xf.examen.themoviedb.Views
         public MainPage()
         {
             InitializeComponent();
-            _ = GetAsyncMet();
-        }
-
-        private async Task GetAsyncMet()
-        {
-            MoviesService moviesService = new MoviesService();
-            _ = await moviesService.GetTopRated();
+            this.BindingContext = new MainViewModel();
         }
     }
 }

@@ -6,6 +6,7 @@ namespace xf.examen.themoviedb.Models
     {
         [JsonProperty("title")]
         public string Title { get; set; }
+
         [JsonProperty("poster_path")]
         public string PosterImage { get; set; }
     }

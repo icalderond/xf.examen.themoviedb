@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="xf.examen.themoviedb.Views.MainPage"
              BackgroundColor="Transparent">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <x:Array x:Key="ListExample" Type="{x:Type x:String}">
-                <x:String>a</x:String>
-                <x:String>a</x:String>
-                <x:String>a</x:String>
-                <x:String>a</x:String>
-                <x:String>a</x:String>
-                <x:String>a</x:String>
-            </x:Array>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Frame CornerRadius="20" BackgroundColor="LightSkyBlue"
            Padding="0">
         <Grid>
@@ -21,6 +8,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <!--#region HEADER-->
             <StackLayout Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
                 <Label
                    FontSize="Subtitle"
@@ -31,9 +20,13 @@
                 <Frame CornerRadius="25"
                    HeightRequest="30" VerticalOptions="Center"
                    Padding="1" BackgroundColor="LightBlue">
-                    <SearchBar Placeholder="Search" FontSize="Medium" TextColor="White" BackgroundColor="Transparent"/>
+                    <SearchBar Placeholder="Search" FontSize="Medium" TextColor="White" BackgroundColor="Transparent"
+                               Text="{Binding QuerySearch}"/>
                 </Frame>
             </StackLayout>
+            <!--#endregion HEADER-->
+
+            <!--#region Content movies by type-->
             <Frame Grid.Row="1" BackgroundColor="#1A224C"
                CornerRadius="20" Padding="10,5,10,-5">
                 <StackLayout Orientation="Vertical">
@@ -45,7 +38,7 @@
                         </Grid.RowDefinitions>
 
 
-                        <!--Recommended for you-->
+                        <!--Top Rated-->
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -56,7 +49,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0"
-                               Text="RECOMMENDED FOR YOU"
+                               Text="TOP RATED"
                                FontSize="Micro"
                                    FontAttributes="Bold"
                                TextColor="White"/>
@@ -68,7 +61,7 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{StaticResource ListExample}">
+                            ItemsSource="{Binding TopRateMovies}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -94,10 +87,10 @@
 
                                             <Frame CornerRadius="5" Padding="0"
                                            VerticalOptions="Center" HorizontalOptions="Center">
-                                                <Image Source="https://images-na.ssl-images-amazon.com/images/I/71GW%2BACNBQL._AC_SY879_.jpg" Aspect="AspectFill"/>
+                                                <Image Source="{Binding PosterImage}" Aspect="AspectFill"/>
                                             </Frame>
                                             <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="Avengers: Endgame"
+                                                <Label Text="{Binding Title}"
                                                    LineBreakMode="WordWrap" FontSize="Micro"
                                                    FontAttributes="Bold" HorizontalTextAlignment="Start"
                                                    VerticalTextAlignment="Center"
@@ -113,7 +106,7 @@
                         </Grid>
 
 
-                        <!--Top Rated-->
+                        <!--Up Coming Movies-->
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -124,7 +117,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0"
-                               Text="TOP RATED"
+                               Text="UP COMING"
                                FontSize="Micro"
                                    FontAttributes="Bold"
                                TextColor="White"/>
@@ -136,7 +129,7 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{StaticResource ListExample}">
+                            ItemsSource="{Binding UpComingMovies}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -162,10 +155,10 @@
 
                                             <Frame CornerRadius="5" Padding="0"
                                            VerticalOptions="Center" HorizontalOptions="Center">
-                                                <Image Source="https://images-na.ssl-images-amazon.com/images/I/71GW%2BACNBQL._AC_SY879_.jpg" Aspect="AspectFill"/>
+                                                <Image Source="{Binding PosterImage}" Aspect="AspectFill"/>
                                             </Frame>
                                             <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="Avengers: Endgame"
+                                                <Label Text="{Binding Title}"
                                                    LineBreakMode="WordWrap" FontSize="Micro"
                                                    FontAttributes="Bold" HorizontalTextAlignment="Start"
                                                    VerticalTextAlignment="Center"
@@ -180,7 +173,7 @@
 
                         </Grid>
 
-                        <!--Top Rated-->
+                        <!--Popular movies-->
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -191,7 +184,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0"
-                               Text="TOP RATED"
+                               Text="POPULAR"
                                FontSize="Micro"
                                    FontAttributes="Bold"
                                TextColor="White"/>
@@ -203,7 +196,7 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{StaticResource ListExample}">
+                            ItemsSource="{Binding PopularMovies}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -229,10 +222,10 @@
 
                                             <Frame CornerRadius="5" Padding="0"
                                            VerticalOptions="Center" HorizontalOptions="Center">
-                                                <Image Source="https://images-na.ssl-images-amazon.com/images/I/71GW%2BACNBQL._AC_SY879_.jpg" Aspect="AspectFill"/>
+                                                <Image Source="{Binding PosterImage}" Aspect="AspectFill"/>
                                             </Frame>
                                             <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="Avengers: Endgame"
+                                                <Label Text="{Binding Title}"
                                                    LineBreakMode="WordWrap" FontSize="Micro"
                                                    FontAttributes="Bold" HorizontalTextAlignment="Start"
                                                    VerticalTextAlignment="Center"
@@ -250,6 +243,12 @@
                     </Grid>
                 </StackLayout>
             </Frame>
+            <!--#endregion Content movies by type-->
+
+            <ActivityIndicator Grid.RowSpan="2"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               IsRunning="{Binding IsBusy}"/>
         </Grid>
     </Frame>
 </ContentPage>

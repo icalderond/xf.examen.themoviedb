@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using xf.examen.themoviedb.Models;
 using xf.examen.themoviedb.Services;
 
@@ -9,10 +10,10 @@ namespace xf.examen.themoviedb.ViewModels
     {
         public MainViewModel()
         {
-            MoviesService.GetPopular_Completed += (_, a) =>
+            MoviesService.GetTopRated_Completed += (_, a) =>
             {
-                PopularMovies_Persist = new ObservableCollection<Movie>(a.Results);
-                PopularMovies = new ObservableCollection<Movie>(PopularMovies_Persist);
+                TopRateMovies_Persist = new ObservableCollection<Movie>(a.Results);
+                TopRateMovies = new ObservableCollection<Movie>(TopRateMovies_Persist);
             };
 
             MoviesService.GetUpComing_Completed += (_, a) =>
@@ -27,14 +28,14 @@ namespace xf.examen.themoviedb.ViewModels
                 PopularMovies = new ObservableCollection<Movie>(PopularMovies_Persist);
             };
 
-            LoadData();
+            _ = LoadData();
         }
 
-        private void LoadData()
+        private async Task LoadData()
         {
-            MoviesService.GetTopRated();
-            MoviesService.GetUpComing();
-            MoviesService.GetPopular();
+            await MoviesService.GetTopRated();
+            await MoviesService.GetUpComing();
+            await MoviesService.GetPopular();
         }
 
         private ObservableCollection<Movie> TopRateMovies_Persist;
@@ -111,7 +112,7 @@ namespace xf.examen.themoviedb.ViewModels
                     }
                     else
                     {
-                        PopularMovies = new ObservableCollection<Movie>(PopularMovies_Persist);
+                        TopRateMovies = new ObservableCollection<Movie>(TopRateMovies_Persist);
                         UpComingMovies = new ObservableCollection<Movie>(UpComingMovies_Persist);
                         PopularMovies = new ObservableCollection<Movie>(PopularMovies_Persist);
                     }
