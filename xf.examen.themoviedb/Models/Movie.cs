@@ -9,5 +9,8 @@ namespace xf.examen.themoviedb.Models
 
         [JsonProperty("poster_path")]
         public string PosterImage { get; set; }
+
+        [JsonProperty("id")]
+        public string MovieId { get; set; }
     }
 }

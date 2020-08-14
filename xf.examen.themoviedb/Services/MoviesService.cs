@@ -9,9 +9,9 @@ namespace xf.examen.themoviedb.Services
 {
     public class MoviesService
     {
-        string getTopRatedQuery;
-        string getUpComingQuery;
-        string getPopularQuery;
+        readonly string getTopRatedQuery;
+        readonly string getUpComingQuery;
+        readonly string getPopularQuery;
 
         readonly string URL_BASE_APIREST = "https://api.themoviedb.org/3/movie";
         readonly string URL_BASE_IMAGE = "https://image.tmdb.org/t/p/w500";
