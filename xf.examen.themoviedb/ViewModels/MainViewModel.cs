@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using xf.examen.themoviedb.Models;
@@ -9,31 +10,46 @@ namespace xf.examen.themoviedb.ViewModels
 {
     public class MainViewModel : NotificationEnabledObject
     {
+        int LoadDataEnded = 0;
         public MainViewModel()
         {
             MoviesService.GetTopRated_Completed += (_, a) =>
             {
                 TopRateMovies_Persist = new ObservableCollection<Movie>(a.Results);
                 TopRateMovies = new ObservableCollection<Movie>(TopRateMovies_Persist);
+                LoadDataCount();
             };
 
             MoviesService.GetUpComing_Completed += (_, a) =>
             {
                 UpComingMovies_Persist = new ObservableCollection<Movie>(a.Results);
                 UpComingMovies = new ObservableCollection<Movie>(UpComingMovies_Persist);
+                LoadDataCount();
             };
 
             MoviesService.GetPopular_Completed += (_, a) =>
             {
                 PopularMovies_Persist = new ObservableCollection<Movie>(a.Results);
                 PopularMovies = new ObservableCollection<Movie>(PopularMovies_Persist);
+                LoadDataCount();
             };
 
             _ = LoadData();
         }
 
+        private void LoadDataCount()
+        {
+            LoadDataEnded++;
+            if (LoadDataEnded >= 3)
+            {
+                IsBusy = false;
+                LoadDataEnded = 0;
+            }
+        }
+
         private async Task LoadData()
         {
+            IsBusy = true;
             await MoviesService.GetTopRated();
             await MoviesService.GetUpComing();
             await MoviesService.GetPopular();
