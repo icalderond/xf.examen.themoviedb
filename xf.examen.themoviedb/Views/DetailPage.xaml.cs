@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using xf.examen.themoviedb.ViewModels;
 
 namespace xf.examen.themoviedb.Views
 {
@@ -10,6 +11,7 @@ namespace xf.examen.themoviedb.Views
         public DetailPage(string movieId)
         {
             InitializeComponent();
+            this.BindingContext = new DetailViewModel(movieId);
         }
     }
 }
