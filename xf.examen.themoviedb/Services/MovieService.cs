@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -50,7 +51,12 @@ namespace xf.examen.themoviedb.Services
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponseDetail = JsonConvert.DeserializeObject<BaseResponseDetail>(ContentString);
                 if (baseResponseDetail.Casts != null)
+                {
+                    if (baseResponseDetail.Casts.Count > 5)
+                        baseResponseDetail.Casts = new List<Cast>(baseResponseDetail.Casts.Take(5));
+
                     baseResponseDetail.Casts.ForEach(x => x.ProfileImage = URL_BASE_IMAGE + x.ProfileImage);
+                }
             }
 
             return baseResponseDetail.Casts;

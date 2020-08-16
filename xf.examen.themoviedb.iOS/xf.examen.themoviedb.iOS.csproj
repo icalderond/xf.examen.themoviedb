@@ -134,4 +134,7 @@
       <Name>xf.examen.themoviedb</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="stars_rating.png" />
+  </ItemGroup>
 </Project>

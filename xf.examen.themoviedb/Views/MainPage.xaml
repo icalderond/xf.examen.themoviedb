@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="xf.examen.themoviedb.Views.MainPage"
              BackgroundColor="Transparent" xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             NavigationPage.HasNavigationBar="False"
              iOS:Page.UseSafeArea="true" x:Name="MainView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,6 +16,31 @@
                 <Setter Property="HeightRequest" Value="300"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
+            <DataTemplate x:Key="MovieTemplate">
+                <Grid Padding="0,10,5,0"
+                                         WidthRequest="100">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference MainView},Path=BindingContext.SelectedItemCommand}" NumberOfTapsRequired="1"
+                                                                      CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <Image Source="{Binding PosterImage}" Style="{StaticResource PosterImageStyle}"/>
+                    </Frame>
+                    <StackLayout Grid.Row="1" Spacing="0">
+                        <Label Text="{Binding Title}"
+                                                   LineBreakMode="NoWrap" FontSize="Micro"
+                                                   FontAttributes="Bold" HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"
+                                                   TextColor="White"/>
+                        <Image Source="stars_rating" BackgroundColor="Transparent" Grid.Column="1" HorizontalOptions="Start" HeightRequest="10" Margin="1"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -78,7 +104,8 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{Binding TopRateMovies}">
+                            ItemsSource="{Binding TopRateMovies}"
+                                ItemTemplate="{StaticResource MovieTemplate}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -93,34 +120,6 @@
                                                  SnapPointsType="Mandatory"
                                                  SnapPointsAlignment="Start"/>
                                 </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Padding="0,10,5,0"
-                                         WidthRequest="100">
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Source={x:Reference MainView},Path=BindingContext.SelectedItemCommand}" NumberOfTapsRequired="1"
-                                                                      CommandParameter="{Binding .}"/>
-                                            </Grid.GestureRecognizers>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Frame Style="{StaticResource FrameStyle}">
-                                                <Image Source="{Binding PosterImage}" Style="{StaticResource PosterImageStyle}"/>
-                                            </Frame>
-                                            <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="{Binding Title}"
-                                                   LineBreakMode="NoWrap" FontSize="Micro"
-                                                   FontAttributes="Bold" HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Center"
-                                                   TextColor="White"/>
-                                                <Label Text="Estrellitas" FontSize="Micro"
-                                                   TextColor="White"/>
-                                            </StackLayout>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
                             </CollectionView>
 
                         </Grid>
@@ -149,7 +148,8 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{Binding UpComingMovies}">
+                            ItemsSource="{Binding UpComingMovies}"
+                                ItemTemplate="{StaticResource MovieTemplate}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -164,30 +164,6 @@
                                                  SnapPointsType="Mandatory"
                                                  SnapPointsAlignment="Start"/>
                                 </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Padding="0,10,5,0"
-                                         WidthRequest="100">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Frame Style="{StaticResource FrameStyle}">
-                                                <Image Source="{Binding PosterImage}" Style="{StaticResource PosterImageStyle}"/>
-                                            </Frame>
-                                            <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="{Binding Title}"
-                                                   LineBreakMode="WordWrap" FontSize="Micro"
-                                                   FontAttributes="Bold" HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Center"
-                                                   TextColor="White"/>
-                                                <Label Text="Estrellitas" FontSize="Micro"
-                                                   TextColor="White"/>
-                                            </StackLayout>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
                             </CollectionView>
 
                         </Grid>
@@ -215,7 +191,8 @@
                             <CollectionView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
-                            ItemsSource="{Binding PopularMovies}">
+                            ItemsSource="{Binding PopularMovies}"
+                                ItemTemplate="{StaticResource MovieTemplate}">
                                 <CollectionView.EmptyView>
                                     <Grid>
                                         <Label 
@@ -230,30 +207,6 @@
                                                  SnapPointsType="Mandatory"
                                                  SnapPointsAlignment="Start"/>
                                 </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Padding="0,10,5,0"
-                                         WidthRequest="100">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Frame Style="{StaticResource FrameStyle}">
-                                                <Image Source="{Binding PosterImage}" Style="{StaticResource PosterImageStyle}"/>
-                                            </Frame>
-                                            <StackLayout Grid.Row="1" Spacing="0">
-                                                <Label Text="{Binding Title}"
-                                                   LineBreakMode="WordWrap" FontSize="Micro"
-                                                   FontAttributes="Bold" HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Center"
-                                                   TextColor="White"/>
-                                                <Label Text="Estrellitas" FontSize="Micro"
-                                                   TextColor="White"/>
-                                            </StackLayout>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
                             </CollectionView>
 
                         </Grid>
