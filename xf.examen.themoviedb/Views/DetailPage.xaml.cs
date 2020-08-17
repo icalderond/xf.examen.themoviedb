@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using xf.examen.themoviedb.ViewModels;
 
 namespace xf.examen.themoviedb.Views

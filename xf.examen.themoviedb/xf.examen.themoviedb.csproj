@@ -20,5 +20,6 @@
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

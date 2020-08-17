@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="xf.examen.themoviedb.Views.DetailPage" NavigationPage.HasNavigationBar="False">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xf.examen.themoviedb.Views.DetailPage"
+             xmlns:converter="clr-namespace:xf.examen.themoviedb.Converters"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ArrayToJoinConverter x:Key="arrayToJoinConverter"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid BackgroundColor="#1A224C" BindingContext="{Binding MovieDetail}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -55,7 +65,7 @@
                                     <Image Source="{Binding ProfileImage}"
                                            Aspect="AspectFill"/>
                                 </Frame>
-                                <Label Text="{Binding Nombre}" TextColor="White" FontSize="Small"
+                                <Label Text="{Binding Name}" TextColor="White" FontSize="Small"
                                        HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </DataTemplate>
@@ -66,19 +76,47 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" TextColor="White" Text="Studio" FontAttributes="Bold" FontSize="Small"/>
-                    <Label Grid.Column="1" Grid.Row="0" TextColor="White" Text="Warner Bros" FontSize="Small"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           TextColor="White"
+                           Text="Studio"
+                           FontAttributes="Bold"
+                           FontSize="Small"/>
+                    <Label Grid.Column="1"
+                           Grid.Row="0" TextColor="White"
+                           Text="{Binding Studio, Converter={StaticResource arrayToJoinConverter}}"
+                           FontSize="Small"/>
 
-                    <Label Grid.Column="0" Grid.Row="1" TextColor="White" Text="Genre" FontAttributes="Bold" FontSize="Small"/>
-                    <Label Grid.Column="1" Grid.Row="1" TextColor="White" Text="Action, Adventure, Fantasy" FontSize="Small"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="1"
+                           TextColor="White"
+                           Text="Genre"
+                           FontAttributes="Bold"
+                           FontSize="Small"/>
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                           TextColor="White"
+                           Text="{Binding Genres, Converter={StaticResource arrayToJoinConverter}}"
+                           FontSize="Small"/>
 
-                    <Label Grid.Column="0" Grid.Row="2" TextColor="White" Text="Release" FontAttributes="Bold" FontSize="Small"/>
-                    <Label Grid.Column="1" Grid.Row="2" TextColor="White" Text="{Binding Release}" FontSize="Small"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="2"
+                           TextColor="White"
+                           Text="Release"
+                           FontAttributes="Bold"
+                           FontSize="Small"/>
+                    <Label Grid.Column="1"
+                           Grid.Row="2"
+                           TextColor="White"
+                           Text="{Binding Release}"
+                           FontSize="Small"/>
                 </Grid>
             </Grid>
             <!--#endregion CAST-->
         </Grid>
-
+        <ActivityIndicator VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               IsRunning="{Binding IsBusy}"/>
     </Grid>
 </ContentPage>
 <!--5-->

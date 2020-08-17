@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace xf.examen.themoviedb.Models
@@ -27,24 +26,19 @@ namespace xf.examen.themoviedb.Models
         public List<Cast> Casts { get; set; }
     }
 
-    public class Cast
+    public class Cast : GenericBase
     {
-        [JsonProperty("name")]
-        public string Nombre { get; set; }
-
         [JsonProperty("profile_path")]
         public string ProfileImage { get; set; }
     }
 
-    public class Productions
-    {
-        [JsonProperty("name")]
-        public string Nombre { get; set; }
-    }
+    public class Productions : GenericBase { }
 
-    public class Genre
+    public class Genre : GenericBase { }
+
+    public class GenericBase
     {
         [JsonProperty("name")]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
     }
 }

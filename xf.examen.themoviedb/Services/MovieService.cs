@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Xamarin.Forms.Internals;
 using xf.examen.themoviedb.Models;
 
 namespace xf.examen.themoviedb.Services
@@ -32,7 +31,13 @@ namespace xf.examen.themoviedb.Services
                 var ContentString = await response.Content.ReadAsStringAsync();
                 movieDetail = JsonConvert.DeserializeObject<MovieDetail>(ContentString);
                 if (movieDetail != null)
+                {
                     movieDetail.PosterImage = URL_BASE_IMAGE + movieDetail.PosterImage;
+
+                    var splitData = movieDetail.Release.Split('-');
+                    if (splitData.Any())
+                        movieDetail.Release = splitData[0];
+                }
                 movieDetail.Casts = await GetCastsMovie(MovieId);
             }
 
@@ -52,7 +57,8 @@ namespace xf.examen.themoviedb.Services
                 baseResponseDetail = JsonConvert.DeserializeObject<BaseResponseDetail>(ContentString);
                 if (baseResponseDetail.Casts != null)
                 {
-                    if (baseResponseDetail.Casts.Count > 5)
+                    baseResponseDetail.Casts = baseResponseDetail.Casts.Where(x => x.ProfileImage != null).ToList();
+                    if (baseResponseDetail.Casts.Count > 4)
                         baseResponseDetail.Casts = new List<Cast>(baseResponseDetail.Casts.Take(5));
 
                     baseResponseDetail.Casts.ForEach(x => x.ProfileImage = URL_BASE_IMAGE + x.ProfileImage);

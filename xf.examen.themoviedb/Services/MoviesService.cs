@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -38,7 +39,11 @@ namespace xf.examen.themoviedb.Services
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
                 if (baseResponse.Movies != null)
+                {
+                    if (baseResponse.Movies.Any())
+                        baseResponse.Movies = baseResponse.Movies.Take(10).ToList();
                     baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
+                }
             }
 
             GetTopRated_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
@@ -55,7 +60,11 @@ namespace xf.examen.themoviedb.Services
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
                 if (baseResponse.Movies != null)
+                {
+                    if (baseResponse.Movies.Any())
+                        baseResponse.Movies = baseResponse.Movies.Take(10).ToList();
                     baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
+                }
             }
 
             GetUpComing_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
@@ -72,7 +81,12 @@ namespace xf.examen.themoviedb.Services
                 var ContentString = await response.Content.ReadAsStringAsync();
                 baseResponse = JsonConvert.DeserializeObject<BaseResponse>(ContentString);
                 if (baseResponse.Movies != null)
+                {
+                    if (baseResponse.Movies.Any())
+                        baseResponse.Movies = baseResponse.Movies.Take(10).ToList();
+
                     baseResponse.Movies.ForEach((item) => item.PosterImage = URL_BASE_IMAGE + item.PosterImage);
+                }
             }
 
             GetPopular_Completed?.Invoke(this, new GenericEventArg<List<Movie>>(baseResponse.Movies));
