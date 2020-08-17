@@ -7,10 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ArrayToJoinConverter x:Key="arrayToJoinConverter"/>
-
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid BackgroundColor="#1A224C" BindingContext="{Binding MovieDetail}">
+    <Grid BackgroundColor="#303e50" BindingContext="{Binding MovieDetail}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
