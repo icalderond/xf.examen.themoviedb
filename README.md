@@ -16,4 +16,8 @@ Este es un proyecto creado para la utilización de diferentes conceptos de Xamar
 
 ## Capturas de pantalla de cada plataforma
 ### iOS
+![](screenshoots/main_ios.png)
+![](screenshoots/detail_ios.png)
 ### Android
+![](screenshoots/main_droid.png)
+![](screenshoots/detail_droid.png)
