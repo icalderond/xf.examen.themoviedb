@@ -7,15 +7,18 @@
         <ResourceDictionary>
             <Style x:Key="PosterImageStyle" TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFill"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                 <Setter Property="WidthRequest" Value="80"/>
             </Style>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HasShadow" Value="False"/>
             </Style>
             <DataTemplate x:Key="MovieTemplate">
                 <Grid Padding="0,10,5,0"
