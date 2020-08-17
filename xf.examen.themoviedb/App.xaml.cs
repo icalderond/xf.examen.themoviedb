@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using xf.examen.themoviedb.CustomRender;
 using xf.examen.themoviedb.Views;
 
 namespace xf.examen.themoviedb
@@ -9,7 +10,7 @@ namespace xf.examen.themoviedb
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new CustomNavigationPage(new MainPage());
         }
 
         protected override void OnStart()

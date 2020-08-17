@@ -21,5 +21,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Converters\" />
+    <Folder Include="CustomRender\" />
   </ItemGroup>
 </Project>

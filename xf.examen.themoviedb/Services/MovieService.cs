@@ -58,8 +58,8 @@ namespace xf.examen.themoviedb.Services
                 if (baseResponseDetail.Casts != null)
                 {
                     baseResponseDetail.Casts = baseResponseDetail.Casts.Where(x => x.ProfileImage != null).ToList();
-                    if (baseResponseDetail.Casts.Count > 4)
-                        baseResponseDetail.Casts = new List<Cast>(baseResponseDetail.Casts.Take(5));
+                    if (baseResponseDetail.Casts.Count > 10)
+                        baseResponseDetail.Casts = new List<Cast>(baseResponseDetail.Casts.Take(10));
 
                     baseResponseDetail.Casts.ForEach(x => x.ProfileImage = URL_BASE_IMAGE + x.ProfileImage);
                 }

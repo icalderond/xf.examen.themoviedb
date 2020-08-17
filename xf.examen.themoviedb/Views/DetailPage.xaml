@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="xf.examen.themoviedb.Views.DetailPage"
-             xmlns:converter="clr-namespace:xf.examen.themoviedb.Converters"
-             NavigationPage.HasNavigationBar="False">
+             xmlns:converter="clr-namespace:xf.examen.themoviedb.Converters">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ArrayToJoinConverter x:Key="arrayToJoinConverter"/>
@@ -44,72 +43,87 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.Resources>
-                    <x:Array x:Key="array_test" Type="{x:Type x:String}">
-                        <x:String>a</x:String>
-                        <x:String>a</x:String>
-                        <x:String>a</x:String>
-                        <x:String>a</x:String>
-                        <x:String>a</x:String>
-                    </x:Array>
-                </Grid.Resources>
-                <StackLayout Grid.Row="0" BindableLayout.ItemsSource="{Binding Casts}"
-                             Orientation="Horizontal" Margin="0,10,0,10">
-                    <BindableLayout.ItemTemplate>
+                <CollectionView Grid.Row="0"
+                                ItemsSource="{Binding Casts}"
+                                ItemsLayout="HorizontalList"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="80">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <StackLayout Margin="10,0"
+                                         WidthRequest="70">
                                 <Frame Padding="0" WidthRequest="40" HeightRequest="40" CornerRadius="20"
                                        HorizontalOptions="Center" VerticalOptions="Center" HasShadow="False"
                                        IsClippedToBounds="True">
                                     <Image Source="{Binding ProfileImage}"
                                            Aspect="AspectFill"/>
                                 </Frame>
-                                <Label Text="{Binding Name}" TextColor="White" FontSize="Small"
-                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Name}"
+                                       TextColor="White"
+                                       FontSize="Small"
+                                       HorizontalTextAlignment="Center"
+                                       LineBreakMode="WordWrap"/>
                             </StackLayout>
                         </DataTemplate>
-                    </BindableLayout.ItemTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout Grid.Row="1">
+                    <Grid ColumnSpacing="5"
+                          RowSpacing="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0"
+                               Grid.Row="0"
+                               TextColor="White"
+                               Text="Studio"
+                               FontAttributes="Bold"
+                               FontSize="Small"/>
+                        <Label Grid.Column="1"
+                               Grid.Row="0" TextColor="White"
+                               Text="{Binding Studio, Converter={StaticResource arrayToJoinConverter}}"
+                               FontSize="Small"
+                               HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="0"
+                               Grid.Row="1"
+                               TextColor="White"
+                               Text="Genre"
+                               FontAttributes="Bold"
+                               FontSize="Small"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                               Grid.Row="1"
+                               TextColor="White"
+                               Text="{Binding Genres, Converter={StaticResource arrayToJoinConverter}}"
+                               FontSize="Small"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Center"/>
+
+                        <Label Grid.Column="0"
+                               Grid.Row="2"
+                               TextColor="White"
+                               Text="Release"
+                               FontAttributes="Bold"
+                               FontSize="Small"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                               Grid.Row="2"
+                               FontSize="Small"
+                               HorizontalOptions="StartAndExpand"
+                               TextColor="White"
+                               Text="{Binding Release}"
+                               VerticalOptions="Center"/>
+                    </Grid>
                 </StackLayout>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0"
-                           Grid.Row="0"
-                           TextColor="White"
-                           Text="Studio"
-                           FontAttributes="Bold"
-                           FontSize="Small"/>
-                    <Label Grid.Column="1"
-                           Grid.Row="0" TextColor="White"
-                           Text="{Binding Studio, Converter={StaticResource arrayToJoinConverter}}"
-                           FontSize="Small"/>
 
-                    <Label Grid.Column="0"
-                           Grid.Row="1"
-                           TextColor="White"
-                           Text="Genre"
-                           FontAttributes="Bold"
-                           FontSize="Small"/>
-                    <Label Grid.Column="1"
-                           Grid.Row="1"
-                           TextColor="White"
-                           Text="{Binding Genres, Converter={StaticResource arrayToJoinConverter}}"
-                           FontSize="Small"/>
-
-                    <Label Grid.Column="0"
-                           Grid.Row="2"
-                           TextColor="White"
-                           Text="Release"
-                           FontAttributes="Bold"
-                           FontSize="Small"/>
-                    <Label Grid.Column="1"
-                           Grid.Row="2"
-                           TextColor="White"
-                           Text="{Binding Release}"
-                           FontSize="Small"/>
-                </Grid>
             </Grid>
             <!--#endregion CAST-->
         </Grid>
