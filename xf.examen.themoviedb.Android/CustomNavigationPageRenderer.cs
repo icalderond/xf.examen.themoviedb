@@ -30,7 +30,7 @@ namespace xf.examen.themoviedb.Droid
             {
                 AView child = GetChildAt(i);
 
-                if (child is Android.Support.V7.Widget.Toolbar)
+                if (child is AndroidX.AppCompat.Widget.Toolbar)
                 {
                     continue;
                 }
