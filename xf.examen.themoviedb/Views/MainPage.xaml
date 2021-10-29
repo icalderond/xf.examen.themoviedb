@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="xf.examen.themoviedb.Views.MainPage" BackgroundColor="Transparent"
              xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              NavigationPage.HasNavigationBar="False"
+             xmlns:CR="clr-namespace:xf.examen.themoviedb.CustomRender"
              iOS:Page.UseSafeArea="true" x:Name="MainView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -84,11 +85,12 @@
                        HeightRequest="30"
                        Padding="1"
                        VerticalOptions="Center">
-                        <SearchBar BackgroundColor="Transparent"
+                        <CR:CustomSearchBar BackgroundColor="Transparent"
                                FontSize="Medium"
                                Placeholder="Search"
                                Text="{Binding QuerySearch}"
-                               TextColor="White" />
+                               TextColor="White"
+                                  />
                     </Frame>
                 </StackLayout>
                 <!--#endregion HEADER-->
